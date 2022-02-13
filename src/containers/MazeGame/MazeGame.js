@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Draggable from "react-draggable";
 import ball from "../../assets/WelcomePageBall.png";
 import mazeJson from "./maze";
@@ -8,7 +8,7 @@ const MazeGame = () => {
   let ref = useRef();
   let [ballPosition, setBallPosition] = useState({ x: 0, y: 15 });
   let [smallBallPosition, setSmallBallPosition] = useState({ a: 0, b: 0 });
-  const [disabled, setDisabled] = useState(false);
+  const [disabled] = useState(false);
   let [img, setImage] = useState(ref);
   let [count, setCount] = useState(0);
 
@@ -19,6 +19,8 @@ const MazeGame = () => {
   let a;
   let b;
   const imageClick = (e) => {
+    if (!ref.current) return;
+
     let offset = img.current.getBoundingClientRect();
     x = Math.abs(Math.round(e.pageX - offset.left));
     y = Math.abs(Math.round(e.pageY - offset.top));
@@ -30,6 +32,8 @@ const MazeGame = () => {
   };
 
   const imageClick2 = (e) => {
+    if (!ref.current) return;
+
     let offset = img.current.getBoundingClientRect();
     a = Math.abs(Math.round(e.pageX - offset.left));
     b = Math.abs(Math.round(e.pageY - offset.top));
@@ -140,9 +144,9 @@ const MazeGame = () => {
 
   // console.log("counter", count);
 
-  const toggleDraggable = () => {
-    setDisabled(!disabled);
-  };
+  // const toggleDraggable = () => {
+  //   setDisabled(!disabled);
+  // };
 
   const onStart = () => {
     setBallPosition(null);
@@ -219,6 +223,7 @@ const MazeGame = () => {
                 >
                   <img
                     id="ball"
+                    alt="Ball"
                     className="Ball"
                     onMouseEnter={imageClick}
                     onDrop={handleOnDrop}
@@ -229,12 +234,13 @@ const MazeGame = () => {
               </Draggable>
 
               {Object.entries(mazeJson.layout).map((data) => {
-                // console.log("hey", data);
+                // console.log("hey", data[0]);
                 if (data[0] % 3 === 0) {
                   return (
                     <>
                       {data[1]["coin"] === true ? (
                         <img
+                          alt="coin"
                           className="smallBalls"
                           onMouseEnter={imageClick2}
                           onDrop={handleOnDrop}
@@ -246,6 +252,7 @@ const MazeGame = () => {
 
                       <div
                         className="borderShape"
+                        key={data[0]}
                         style={{
                           borderLeft:
                             data[1]["borderL"] === true
@@ -272,6 +279,7 @@ const MazeGame = () => {
                     <>
                       {data[1]["coin"] === true ? (
                         <img
+                          alt="coin"
                           className="smallBalls"
                           onMouseEnter={imageClick2}
                           onDrop={handleOnDrop}
@@ -282,6 +290,7 @@ const MazeGame = () => {
 
                       <div
                         className="borderShape"
+                        key={data[0]}
                         style={{
                           borderLeft:
                             data[1]["borderL"] === true
@@ -308,6 +317,7 @@ const MazeGame = () => {
                     <>
                       {data[1]["coin"] === true ? (
                         <img
+                          alt="coin"
                           className="smallBalls"
                           onMouseEnter={imageClick2}
                           onDrop={handleOnDrop}
@@ -318,6 +328,7 @@ const MazeGame = () => {
 
                       <div
                         className="borderShape"
+                        key={data[0]}
                         style={{
                           borderLeft:
                             data[1]["borderL"] === true

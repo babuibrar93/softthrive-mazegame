@@ -12,7 +12,6 @@ import Rules from "./containers/LogicalPuzzle/Rules";
 import LogicalPuzzle from "./containers/LogicalPuzzle/LogicalPuzzle";
 
 import MazeGame from "./containers/MazeGame/MazeGame";
-import Test from "./containers/MazeGame/test";
 
 
 function App() {
@@ -43,7 +42,6 @@ function App() {
                     <Route path="/logical-puzzle/rules" element={<Rules />} />
                     <Route path="/logical-puzzle" element={<LogicalPuzzle />} />
                     <Route path="/maze-game" element={<MazeGame />} />
-                    <Route path="/test" element={<Test />} />
                   </Routes>
                 </div>
               </div>
