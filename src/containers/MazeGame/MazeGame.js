@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Draggable from "react-draggable";
 import ball from "../../assets/WelcomePageBall.png";
 import mazeJson from "./maze";
@@ -12,8 +12,8 @@ const MazeGame = () => {
   let [img, setImage] = useState(ref);
   let [count, setCount] = useState(0);
 
-  // console.log("ball position", ballPosition);
-  // console.log("smallBallPosition", smallBallPosition);
+  console.log("ball position", ballPosition);
+  console.log("smallBallPosition", smallBallPosition);
   let x;
   let y;
   let a;
@@ -67,18 +67,18 @@ const MazeGame = () => {
     let collapsePosition = Math.abs(ballPosition.y - smallBallPosition.b);
     if (Math.abs(collapsePosition < 10)) {
       if (
-        smallBallPosition.a < 220 &&
-        smallBallPosition.a > 200 &&
-        smallBallPosition.b > 580 &&
+        smallBallPosition.a < 230 &&
+        smallBallPosition.a > 170 &&
+        smallBallPosition.b > 510 &&
         smallBallPosition.b < 650
       ) {
         Object.entries(mazeJson.layout)[2][1].coin = false;
         count = count + 1;
         return setCount(count);
       } else if (
-        smallBallPosition.a > 142 &&
+        smallBallPosition.a > 120 &&
         smallBallPosition.a < 165 &&
-        smallBallPosition.b > 585 &&
+        smallBallPosition.b > 555 &&
         smallBallPosition.b < 650
       ) {
         Object.entries(mazeJson.layout)[7][1].coin = false;
@@ -86,7 +86,7 @@ const MazeGame = () => {
         return setCount(count);
       } else if (
         smallBallPosition.a > 60 &&
-        smallBallPosition.a < 75 &&
+        smallBallPosition.a < 80 &&
         smallBallPosition.b > 500 &&
         smallBallPosition.b < 565
       ) {
@@ -94,35 +94,35 @@ const MazeGame = () => {
         count = count + 1;
         return setCount(count);
       } else if (
-        smallBallPosition.b > 370 &&
-        smallBallPosition.a < 565 &&
-        smallBallPosition.a > 140 &&
-        smallBallPosition.a < 160
-      ) {
-        Object.entries(mazeJson.layout)[16][1].coin = false;
-        count = count + 1;
-        return setCount(count);
-      } else if (
         smallBallPosition.a > 70 &&
-        smallBallPosition.a < 85 &&
-        smallBallPosition.b > 460 &&
-        smallBallPosition.b < 550
+        smallBallPosition.a < 90 &&
+        smallBallPosition.b > 380 &&
+        smallBallPosition.b < 510
       ) {
         Object.entries(mazeJson.layout)[24][1].coin = false;
         count = count + 1;
         return setCount(count);
       } else if (
-        smallBallPosition.b > 350 &&
+        smallBallPosition.b > 300 &&
         smallBallPosition.b < 415 &&
-        smallBallPosition.a > 55 &&
-        smallBallPosition.a < 75
+        smallBallPosition.a > 45 &&
+        smallBallPosition.a < 80
       ) {
         Object.entries(mazeJson.layout)[31][1].coin = false;
         count = count + 1;
         return setCount(count);
       } else if (
-        smallBallPosition.b > 65 &&
-        smallBallPosition.b < 80 &&
+        smallBallPosition.b > 180 &&
+        smallBallPosition.b < 245 &&
+        smallBallPosition.a > 230 &&
+        smallBallPosition.a < 310
+      ) {
+        Object.entries(mazeJson.layout)[46][1].coin = false;
+        count = count + 1;
+        return setCount(count);
+      } else if (
+        smallBallPosition.b > 50 &&
+        smallBallPosition.b < 85 &&
         smallBallPosition.a > 50 &&
         smallBallPosition.a < 100
       ) {

@@ -140,7 +140,7 @@ const mazeJson = {
       borderR: true,
       borderT: true,
       borderB: false,
-      coin: true,
+      coin: false,
     },
     {
       borderL: true, // 18
@@ -351,7 +351,7 @@ const mazeJson = {
       borderR: false,
       borderT: true,
       borderB: true,
-      coin: false,
+      coin: true,
     },
     {
       borderL: true,
