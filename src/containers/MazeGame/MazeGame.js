@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Draggable from "react-draggable";
+import DraggableCore from "react-draggable";
 import ball from "../../assets/WelcomePageBall.png";
 import mazeJson from "./maze";
 import "../../styles/PagesStyles/MazeGame/mazegame.css";
@@ -7,29 +7,57 @@ import "../../styles/PagesStyles/MazeGame/mazegame.css";
 const MazeGame = () => {
   let ref = useRef();
   let [ballPosition, setBallPosition] = useState({ x: 0, y: 15 });
+  //let myRef = React.createRef();
   let [smallBallPosition, setSmallBallPosition] = useState({ a: 0, b: 0 });
   const [disabled] = useState(false);
   let [img, setImage] = useState(ref);
   let [count, setCount] = useState(0);
 
-  console.log("ball position", ballPosition);
+  let json = Object.entries(mazeJson.layout)
+  let [mazeJs, setMazeJs] = useState(json)
+
+  console.log("mazeJs", mazeJs);
+
   console.log("smallBallPosition", smallBallPosition);
   let x;
   let y;
   let a;
   let b;
-  const imageClick = (e) => {
+   const imageClick = (e) => {
     if (!ref.current) return;
 
     let offset = img.current.getBoundingClientRect();
     x = Math.abs(Math.round(e.pageX - offset.left));
     y = Math.abs(Math.round(e.pageY - offset.top));
 
-    // console.log("Ball X", x);
-    // console.log("Ball Y", y);
+     console.log("Ball X", x);
+     console.log("Ball Y", y);
     setBallPosition({ x, y });
     handleOnDrop();
   };
+
+  const DraggableEventHandler = (e) => {
+   
+    if (!ref.current) return;
+
+    let offset = img.current.getBoundingClientRect();
+    x = Math.abs(Math.round(e.pageX - offset.left));
+    y = Math.abs(Math.round(e.pageY - offset.top));
+
+    console.log("Ball X", x);
+    console.log("Ball Y", y);
+    setBallPosition({ x, y });
+    if (
+      ballPosition.x < 200 
+    ) {
+      let obj = mazeJs[2][1]
+      obj.hide = true
+      mazeJs[2][1] = obj
+      console.log(obj)
+    } 
+    //handleOnDrop();
+  }
+
 
   const imageClick2 = (e) => {
     if (!ref.current) return;
@@ -62,7 +90,7 @@ const MazeGame = () => {
   //   }
   // });
 
-  // console.log("hey coin", Object.entries(mazeJson.layout)[7][1]);
+  // console.log("hey coin", mazeJs[7][1]);
   const handleOnDrop = () => {
     let collapsePosition = Math.abs(ballPosition.y - smallBallPosition.b);
     if (Math.abs(collapsePosition < 10)) {
@@ -72,72 +100,72 @@ const MazeGame = () => {
         smallBallPosition.b > 510 &&
         smallBallPosition.b < 650
       ) {
-        Object.entries(mazeJson.layout)[2][1].coin = false;
+        mazeJs[2][1].coin = false;
         count = count + 1;
-        return setCount(count);
+         setCount(count);
       } else if (
         smallBallPosition.a > 120 &&
         smallBallPosition.a < 165 &&
         smallBallPosition.b > 555 &&
         smallBallPosition.b < 650
       ) {
-        Object.entries(mazeJson.layout)[7][1].coin = false;
+        mazeJs[7][1].coin = false;
         count = count + 1;
-        return setCount(count);
+         setCount(count);
       } else if (
         smallBallPosition.a > 60 &&
         smallBallPosition.a < 80 &&
         smallBallPosition.b > 500 &&
         smallBallPosition.b < 565
       ) {
-        Object.entries(mazeJson.layout)[13][1].coin = false;
+        mazeJs[13][1].coin = false;
         count = count + 1;
-        return setCount(count);
+         setCount(count);
       } else if (
         smallBallPosition.a > 70 &&
         smallBallPosition.a < 90 &&
         smallBallPosition.b > 380 &&
         smallBallPosition.b < 510
       ) {
-        Object.entries(mazeJson.layout)[24][1].coin = false;
+        mazeJs[24][1].coin = false;
         count = count + 1;
-        return setCount(count);
+         setCount(count);
       } else if (
         smallBallPosition.b > 300 &&
         smallBallPosition.b < 415 &&
         smallBallPosition.a > 45 &&
         smallBallPosition.a < 80
       ) {
-        Object.entries(mazeJson.layout)[31][1].coin = false;
+        mazeJs[31][1].coin = false;
         count = count + 1;
-        return setCount(count);
+         setCount(count);
       } else if (
         smallBallPosition.b > 180 &&
         smallBallPosition.b < 245 &&
         smallBallPosition.a > 230 &&
         smallBallPosition.a < 310
       ) {
-        Object.entries(mazeJson.layout)[46][1].coin = false;
+        mazeJs[46][1].coin = false;
         count = count + 1;
-        return setCount(count);
+         setCount(count);
       } else if (
         smallBallPosition.b > 50 &&
         smallBallPosition.b < 85 &&
         smallBallPosition.a > 50 &&
         smallBallPosition.a < 100
       ) {
-        Object.entries(mazeJson.layout)[67][1].coin = false;
+        mazeJs[67][1].coin = false;
         count = count + 1;
-        return setCount(count);
+         setCount(count);
       } else if (
         smallBallPosition.a > 0 &&
         smallBallPosition.a < 15 &&
         smallBallPosition.b > 0 &&
         smallBallPosition.b < 50
       ) {
-        Object.entries(mazeJson.layout)[77][1].coin = false;
+        mazeJs[77][1].coin = false;
         count = count + 1;
-        return setCount(count);
+         setCount(count);
       }
     }
   };
@@ -213,7 +241,7 @@ const MazeGame = () => {
                 height: "100%",
               }}
             >
-              <Draggable disabled={disabled} bounds="parent" {...onStart}>
+              <DraggableCore disabled={disabled} bounds="parent" onDrag= {DraggableEventHandler}  >
                 <div
                   className={!disabled ? "draggable" : null}
                   style={{
@@ -226,27 +254,29 @@ const MazeGame = () => {
                     alt="Ball"
                     className="Ball"
                     onMouseEnter={imageClick}
-                    onDrop={handleOnDrop}
-                    ref={img}
+                     onDrop={handleOnDrop}
+                    //ref={myRef}
                     src={ball}
                   />
                 </div>
-              </Draggable>
+              </DraggableCore>
 
-              {Object.entries(mazeJson.layout).map((data) => {
-                // console.log("hey", data[0]);
+              {mazeJs.map((data) => {
+                
                 if (data[0] % 3 === 0) {
                   return (
                     <>
-                      {data[1]["coin"] === true ? (
+                      {data[1]["coin"] === true?  (
                         <img
                           alt="coin"
-                          className="smallBalls"
+                          
+                          
+                          className={data[1]["hide"]===true? "smallBallsHidden" : "smallBalls"}
                           onMouseEnter={imageClick2}
-                          onDrop={handleOnDrop}
+                          // onDrop={handleOnDrop}
                           ref={img}
                           src={ball}
-                          onChange={(e) => setImage(e.target.onMouseEnter)}
+                          
                         />
                       ) : null}
 
@@ -280,9 +310,13 @@ const MazeGame = () => {
                       {data[1]["coin"] === true ? (
                         <img
                           alt="coin"
-                          className="smallBalls"
+                          className={data[1]["hide"]===true? "smallBallsHidden" : "smallBalls"}
+                          // style={{
+                          //   display: data[1]["hide"]=== true? "none" : "block"
+                          // }}
+                          //className="smallBallsHidden"
                           onMouseEnter={imageClick2}
-                          onDrop={handleOnDrop}
+                          // onDrop={handleOnDrop}
                           ref={img}
                           src={ball}
                         />
@@ -318,9 +352,9 @@ const MazeGame = () => {
                       {data[1]["coin"] === true ? (
                         <img
                           alt="coin"
-                          className="smallBalls"
+                          className={data[1]["hide"]===true? "smallBallsHidden" : "smallBalls"}
                           onMouseEnter={imageClick2}
-                          onDrop={handleOnDrop}
+                          // onDrop={handleOnDrop}
                           ref={img}
                           src={ball}
                         />
