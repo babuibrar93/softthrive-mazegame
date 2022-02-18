@@ -246,7 +246,6 @@ const mazeJson = {
       borderT: true,
       borderB: true,
       coin: true,
-      position: { x: 365, y: 0 },
     },
     {
       borderL: true,
@@ -568,14 +567,14 @@ const mazeJson = {
       borderR: false,
       borderT: true,
       borderB: true,
-      coin: true,
+      coin: false,
     },
     {
       borderL: true,
       borderR: false,
       borderT: true,
       borderB: true,
-      coin: false,
+      coin: true,
     },
     {
       borderL: true,
@@ -590,7 +589,7 @@ const mazeJson = {
       borderT: true, // 81
       borderB: true,
       coin: false,
-    },
+    }
     // {
     //   borderL: true,
     //   borderR: false,

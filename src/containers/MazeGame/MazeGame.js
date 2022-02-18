@@ -15,10 +15,9 @@ const MazeGame = () => {
   let json = Object.entries(mazeJson.layout);
   let [mazeJs, setMazeJs] = useState(json);
 
-  console.log('mazejs', mazeJs) 
+  //console.log('mazejs', mazeJs) 
 
-  console.log("ball position", ballPosition);
-  console.log("smallBallPosition", smallBallPosition);
+
   let x;
   let y;
   let a;
@@ -54,17 +53,20 @@ const MazeGame = () => {
     if (!ref.current) return;
 
     let offset = img.current.getBoundingClientRect();
+    console.log(offset)
+    console.log(offset.left, offset.top )
     x = Math.abs(Math.round(e.pageX - offset.left));
     y = Math.abs(Math.round(e.pageY - offset.top));
 
-    // console.log("Ball X", x);
-    // console.log("Ball Y", y);
+     console.log("Ball X", x);
+    console.log("Ball Y", y);
     setBallPosition({ x, y });
-    // setSmallBallPosition({ x, y });
+    //setSmallBallPosition({ x, y });
 
     let collapsePosition = Math.abs(ballPosition.y - smallBallPosition.b);
-    console.log("collapsePosition", collapsePosition);
+    
     if (collapsePosition < 10) {
+      console.log("smallBallPosition", smallBallPosition.a, smallBallPosition.b );
       if (
         smallBallPosition.a < 380 &&
         smallBallPosition.a > 173 &&
@@ -74,7 +76,8 @@ const MazeGame = () => {
         let obj = mazeJs[2][1];
         obj.hide = true;
         mazeJs[2][1] = obj;
-      } else if (
+        console.log("Ball 1")
+      } if (
         smallBallPosition.a > 120 &&
         smallBallPosition.a < 210 &&
         smallBallPosition.b > 375 &&
@@ -83,7 +86,8 @@ const MazeGame = () => {
         let obj = mazeJs[25][1];
         obj.hide = true;
         mazeJs[25][1] = obj;
-      } else if (
+        console.log("Ball 2")
+      } if (
         smallBallPosition.b > 180 &&
         smallBallPosition.b < 370 &&
         smallBallPosition.a > 230 &&
@@ -92,7 +96,8 @@ const MazeGame = () => {
         let obj = mazeJs[46][1];
         obj.hide = true;
         mazeJs[46][1] = obj;
-      } else if (
+        console.log("Ball 3")
+      } if (
         smallBallPosition.a < 115 &&
         smallBallPosition.a > 60 &&
         smallBallPosition.b > 120 &&
@@ -101,7 +106,8 @@ const MazeGame = () => {
         let obj = mazeJs[60][1];
         obj.hide = true;
         mazeJs[60][1] = obj;
-      } else if (
+        console.log("Ball 4")
+      } if (
         smallBallPosition.b > 50 &&
         smallBallPosition.b < 85 &&
         smallBallPosition.a > 48 &&
@@ -110,11 +116,12 @@ const MazeGame = () => {
         let obj = mazeJs[67][1];
         obj.hide = true;
         mazeJs[67][1] = obj;
+        console.log("Ball 5")
       }
 
       // let collapsePositionTwo = Math.abs(ballPosition.x - smallBallPosition.a);
       // if (Math.abs(collapsePositionTwo < 10)) {
-      else if (
+       if (
         smallBallPosition.a > 49 &&
         smallBallPosition.a < 95 &&
         smallBallPosition.b > 450 &&
@@ -123,7 +130,22 @@ const MazeGame = () => {
         let obj = mazeJs[13][1];
         obj.hide = true;
         mazeJs[13][1] = obj;
-      } else if (
+        console.log("Ball 6")
+        
+      } 
+      //  if (
+      //   smallBallPosition.a > 0 &&
+      //   smallBallPosition.a < 15 &&
+      //   smallBallPosition.b > 0 &&
+      //   smallBallPosition.b < 50
+      // ) {
+      //   let obj = mazeJs[77][1];
+      //   obj.hide = true;
+      //   mazeJs[77][1] = obj;
+      //   console.log("Ball 7")
+        
+      // }
+       if (
         smallBallPosition.b > 315 &&
         smallBallPosition.b < 430 &&
         smallBallPosition.a > 45 &&
@@ -132,34 +154,26 @@ const MazeGame = () => {
         let obj = mazeJs[31][1];
         obj.hide = true;
         mazeJs[31][1] = obj;
+        console.log("Ball 8")
       }
 
       // let collapsePositionTwon = Math.abs(ballPosition.x - smallBallPosition.a);
       // if (Math.abs(collapsePositionTwon < 770)) {
-      else if (
-        smallBallPosition.a > 0 &&
-        smallBallPosition.a < 15 &&
-        smallBallPosition.b > 0 &&
-        smallBallPosition.b < 50
-      ) {
-        let obj = mazeJs[77][1];
-        obj.hide = true;
-        mazeJs[77][1] = obj;
-      }
+      
     }
   };
 
-  const exitPosition = (e) => {
-    if (
-      ballPosition.x > 120 &&
-      ballPosition.x < 160 &&
-      ballPosition.y > 1 &&
-      ballPosition.y < 50
-    ) {
-      console.log("Ball Reached End");
-    }
-  };
-  exitPosition();
+  // const exitPosition = (e) => {
+  //   if (
+  //     ballPosition.x > 120 &&
+  //     ballPosition.x < 160 &&
+  //     ballPosition.y > 1 &&
+  //     ballPosition.y < 50
+  //   ) {
+  //     console.log("Ball Reached End");
+  //   }
+  // };
+  // exitPosition();
   // mazeJson.layout.map((positions, index) => {
   //   // console.log("positions", positions.coin);
   //   if (positions.coin === true) {
