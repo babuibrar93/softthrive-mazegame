@@ -27,7 +27,7 @@
       "borderR": false,
       "borderT": true,
       "borderB": false,
-      "coin": false
+      "coin": true
     },
     {
       "borderL": false,
@@ -321,7 +321,7 @@
       "borderR": false,
       "borderT": true,
       "borderB": true,
-      "coin": false
+      "coin": true
     },
     {
       "borderL": true,
@@ -482,7 +482,7 @@
       "borderR": false,
       "borderT": true,
       "borderB": true,
-      "coin": false
+      "coin": true
     },
     {
       "borderL": true,
@@ -559,7 +559,7 @@
       "borderR": false,
       "borderT": true,
       "borderB": true,
-      "coin": false
+      "coin": true
     },
     {
       "borderL": true,
