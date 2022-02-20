@@ -108,7 +108,7 @@ const MazeGame = () => {
               Now you will play a short series of mazes.<br></br>
               Try to complete the maze according to the instructions as{" "}
               <br></br>
-              quickly as possible and in as few steps as possible
+              quickly as possible and in as few steps as possible 
             </p>
           </div>
 
@@ -154,11 +154,11 @@ const MazeGame = () => {
           <div className="second_column" ref={containerRef}>
             <div
 
-            // style={{
-            //   position: "absolute",
-            //   width: "100%",
-            //   height: "100%",
-            // }}
+            style={{
+              position: "relative",
+              width: "700px",
+              height: "800px",
+            }}
             >
               <Draggable
                 disabled={disabled}
