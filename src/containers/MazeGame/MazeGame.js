@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import Draggable from "react-draggable";
 import ball from "../../assets/WelcomePageBall.png";
-import mazeJson from "./mazejson.json";
+import mazeyaml from "./maze-1.yaml";
+import jsyaml from "js-yaml";
 // import mazeJson from "./maze";
 import "../../styles/PagesStyles/MazeGame/mazegame.css";
 
@@ -15,7 +16,7 @@ const MazeGame = () => {
 
   let [positionsArray, setPositionsArray] = useState([]);
   let [indexArray, setIndexArray] = useState([]);
-
+  let [loaded, setLoaded] = useState([0]);
   positionsArray.map((item) => {
     if (
       item?.coinPosition?.a === ballPosition?.x &&
@@ -27,15 +28,38 @@ const MazeGame = () => {
     }
   });
 
-  let json = Object.entries(mazeJson.layout);
-  let [mazeJs, setMazeJs] = useState(json);
+
+
+  if(loaded < 1)
+  {
+    fetch(mazeyaml)
+    .then(r => r.text())
+    .then(text => {
+      //console.log('text decoded:', text);
+      // [Actual file contents!]
+
+      //var newmazeJSON = JSON.parse(text)
+    
+      var doc = jsyaml.load(text)
+      let json = Object.entries(doc.layout);
+      console.log(json)
+      setMazeJs(json)
+      let newloaded = loaded+1
+      setLoaded(newloaded);
+    });
+}
+
+  let [mazeJs, setMazeJs] = useState();
+  // let json = Object.entries(mazeJson.layout);
+  // let [mazeJs, setMazeJs] = useState(json);
+  
 
   // console.log("ballPosition", ballPosition);
   // console.log("coinPosition", coinPosition);
   // console.log("positionsArray", positionsArray);
   // console.log("mazeJs", mazeJs);
 
-  mazeJs.map((positions, index) => {
+  mazeJs?.map((positions, index) => {
     // console.log("positions", positions[1].coin);
     if (positions[1].hide === true) {
       count = count + 1;
@@ -184,7 +208,7 @@ const MazeGame = () => {
                 </div>
               </Draggable>
 
-              {Object.entries(mazeJson.layout).map((data) => {
+              {mazeJs?.map((data) => {
                 // console.log("hey", data[0]);
                 if (data[0] % 3 === 0) {
                   return (
